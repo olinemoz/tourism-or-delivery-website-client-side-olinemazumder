@@ -17,6 +17,14 @@ const Header = () => {
                         <Nav className="me-auto">
                             <Nav.Link as={HashLink} to="/">Home</Nav.Link>
                             <Nav.Link as={HashLink} to="/packages">Our Packages</Nav.Link>
+                            {
+                                (user?.displayName || user.email) &&
+                                <Nav.Link as={HashLink} to="/my_orders">My Orders</Nav.Link>
+                            }
+                            {
+                                (user?.displayName || user.email) &&
+                                <Nav.Link as={HashLink} to="/manage_all_orders">Manage Orders</Nav.Link>
+                            }
                         </Nav>
                         {
                             (user?.displayName || user.email) ? <Navbar.Text>

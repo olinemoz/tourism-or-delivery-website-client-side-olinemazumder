@@ -74,7 +74,6 @@ const Login = () => {
             .then((userCredential) => {
                 history.push(Redirect_URL)
                 const user = userCredential.user;
-                console.log("Logged In: ", user)
                 setCreateUserError("")
             })
             .catch((error) => {
@@ -84,7 +83,7 @@ const Login = () => {
 
     const googleLogin = () => {
         signInUsingGoogle().then((result) => {
-            console.log("Result Google Login", result)
+            console.log(result)
             history.push(Redirect_URL)
         })
     }
