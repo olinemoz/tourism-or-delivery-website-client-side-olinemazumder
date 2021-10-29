@@ -10,6 +10,7 @@ import Banner from "./Components/Banner/Banner";
 import AboutUs from "./Pages/AboutUs/AboutUs";
 import Footer from "./Components/Footer/Footer";
 import AuthProvider from "./context/AuthProvider";
+import PrivateRoute from "./Pages/Login/PrivateRoute/PrivateRoute";
 
 const App = () => {
     return (
@@ -23,7 +24,10 @@ const App = () => {
                         <Route exact path="/home" component={Home}>
                             <Redirect to="/"/>
                         </Route>
-                        <Route exact path="/packages" component={Packages}/>
+                        {/*<Route exact path="/packages" component={Packages}/>*/}
+                        <PrivateRoute exact path="/packages">
+                            <Packages/>
+                        </PrivateRoute>
                         <Route exact path="/about_us" component={AboutUs}/>
                         <Route exact path="/user_login" component={Login}/>
                         <Route exact component={NotFound}/>

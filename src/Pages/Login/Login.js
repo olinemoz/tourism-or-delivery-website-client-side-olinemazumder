@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import useAuth from "../../context/useAuth";
 import {Form} from "react-bootstrap";
 import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile} from "firebase/auth";
+import {useHistory, useLocation} from "react-router-dom";
 
 const Login = () => {
     const [userLogin, setUserLogin] = useState({
@@ -11,12 +12,15 @@ const Login = () => {
     })
     const [toggleLogin, setToggleLogin] = useState(false)
     const [createUserError, setCreateUserError] = useState("")
+    const location = useLocation()
+    const history = useHistory()
 
     const auth = getAuth();
 
-    const {name, email, password} = userLogin
 
-    const {user, signInUsingGoogle, error} = useAuth()
+    // Destructuring UserLogin
+    const {name, email, password} = userLogin
+    const {signInUsingGoogle, error} = useAuth()
 
     const handleUserChange = (event) => {
         const name = event.target.name
@@ -32,7 +36,6 @@ const Login = () => {
     }
 
     const handleRegistrationUser = event => {
-        console.log("Reg user:", name, email, password, toggleLogin)
         if (toggleLogin) {
             processLogin(email, password)
         } else {
@@ -41,17 +44,8 @@ const Login = () => {
         event.preventDefault()
     }
 
-    const processLogin = (email, password) => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log("Logged In: ", user)
-                setCreateUserError("")
-            })
-            .catch((error) => {
-                setCreateUserError(error.message)
-            });
-    }
+    const Redirect_URL = location.state?.from || '/home'
+
     const processRegister = (email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -72,6 +66,27 @@ const Login = () => {
         }).catch((error) => {
             setCreateUserError(error.message)
         });
+    }
+
+
+    const processLogin = (email, password) => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                history.push(Redirect_URL)
+                const user = userCredential.user;
+                console.log("Logged In: ", user)
+                setCreateUserError("")
+            })
+            .catch((error) => {
+                setCreateUserError(error.message)
+            });
+    }
+
+    const googleLogin = () => {
+        signInUsingGoogle().then((result) => {
+            console.log("Result Google Login", result)
+            history.push(Redirect_URL)
+        })
     }
 
 
@@ -135,7 +150,7 @@ const Login = () => {
                     </button>
                 }
                 <button className="btn btn-primary ms-0 ms-md-3 mt-2 mt-md-0"
-                        onClick={signInUsingGoogle}
+                        onClick={googleLogin}
                 >
                     Google Sign In
                 </button>
