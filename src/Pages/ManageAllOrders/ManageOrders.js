@@ -33,6 +33,7 @@ const ManageOrders = () => {
             .then(response => {
                 if (response.data.modifiedCount) {
                     alert('Order has been Approved')
+                    window.location.reload(true);
                 }
             })
     }
