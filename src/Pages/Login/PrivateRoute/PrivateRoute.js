@@ -5,7 +5,14 @@ import {Spinner} from "react-bootstrap";
 const PrivateRoute = ({children, ...rest}) => {
     const {isLoading, user} = useAuth()
     if (isLoading) {
-        return <Spinner animation="border" variant="danger"/>
+        return <Spinner
+            style={{
+                display: "block",
+                margin: "auto auto"
+            }}
+            animation="border"
+            variant="danger"
+        />
     }
     return (
         <Route
