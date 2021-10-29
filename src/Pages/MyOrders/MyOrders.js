@@ -7,14 +7,14 @@ const MyOrders = () => {
     const {user} = useAuth()
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/orders`)
+        axios.get(`https://glacial-mountain-31995.herokuapp.com/orders`)
             .then(response => setOrders(response.data.filter(orders => orders.email === user.email)))
     }, [user.email])
 
     const handleDeleteOrder = id => {
         const proceed = window.confirm("Are you sure you want to delete this Order ?")
         if (proceed) {
-            axios.delete(`http://localhost:5000/orders/${id}`)
+            axios.delete(`https://glacial-mountain-31995.herokuapp.com/orders/${id}`)
                 .then(response => {
                     if (response.data.deletedCount > 0) {
                         const restOrders = orders.filter(order => order._id !== id)

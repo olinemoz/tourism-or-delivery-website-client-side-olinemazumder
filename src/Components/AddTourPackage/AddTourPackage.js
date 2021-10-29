@@ -7,7 +7,7 @@ const AddTourPackage = () => {
     const {register, handleSubmit, reset} = useForm();
     const onSubmit = data => {
         const newTourPackage = data
-        axios.post(`http://localhost:5000/locations`, newTourPackage)
+        axios.post(`https://glacial-mountain-31995.herokuapp.com/locations`, newTourPackage)
             .then(response => {
                 if (response.data.insertedId) {
                     alert("New Tour Package Added Successfully")

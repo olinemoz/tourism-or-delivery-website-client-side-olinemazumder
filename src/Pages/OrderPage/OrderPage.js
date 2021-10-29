@@ -12,7 +12,7 @@ const OrderPage = () => {
     const {id} = useParams()
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/locations/${id}`)
+        axios.get(`https://glacial-mountain-31995.herokuapp.com/locations/${id}`)
             .then(response => setTourPackage(response.data))
     }, [id])
 
@@ -26,7 +26,7 @@ const OrderPage = () => {
             orderStatus: 'Pending'
         }
         // console.log("New Order",newOrder)
-        axios.post(`http://localhost:5000/orders`, newOrder)
+        axios.post(`https://glacial-mountain-31995.herokuapp.com/orders`, newOrder)
             .then(response => {
                 if (response.data.insertedId) {
                     alert("Order Placed Successfully")

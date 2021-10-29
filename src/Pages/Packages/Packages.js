@@ -11,7 +11,7 @@ const Packages = () => {
     const history = useHistory()
     useEffect(() => {
         setTimeout(() => {
-            axios.get(`http://localhost:5000/locations`)
+            axios.get(`https://glacial-mountain-31995.herokuapp.com/locations`)
                 .then(response => setPackages(response.data))
         }, 300)
     }, [])

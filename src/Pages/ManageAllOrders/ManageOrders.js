@@ -6,7 +6,7 @@ const ManageOrders = () => {
     const [allOrders, setAllOrders] = useState([])
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/orders`)
+        axios.get(`https://glacial-mountain-31995.herokuapp.com/orders`)
             .then(response => setAllOrders(response.data))
     }, [])
 
@@ -14,7 +14,7 @@ const ManageOrders = () => {
     const handleDeleteOrder = id => {
         const proceed = window.confirm("Are you sure you want to delete this Order ?")
         if (proceed) {
-            axios.delete(`http://localhost:5000/orders/${id}`)
+            axios.delete(`https://glacial-mountain-31995.herokuapp.com/orders/${id}`)
                 .then(response => {
                     if (response.data.deletedCount > 0) {
                         const restOrders = allOrders.filter(order => order._id !== id)
@@ -29,7 +29,7 @@ const ManageOrders = () => {
         const updateOrder = {
             orderStatus: 'Approved'
         }
-        axios.put(`http://localhost:5000/orders/${id}`, updateOrder)
+        axios.put(`https://glacial-mountain-31995.herokuapp.com/orders/${id}`, updateOrder)
             .then(response => {
                 if (response.data.modifiedCount) {
                     alert('Order has been Approved')
