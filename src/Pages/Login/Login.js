@@ -14,13 +14,11 @@ const Login = () => {
     const [createUserError, setCreateUserError] = useState("")
     const location = useLocation()
     const history = useHistory()
-
     const auth = getAuth();
-
-
     // Destructuring UserLogin
     const {name, email, password} = userLogin
     const {signInUsingGoogle, error} = useAuth()
+
 
     const handleUserChange = (event) => {
         const name = event.target.name
@@ -74,6 +72,7 @@ const Login = () => {
             .then((userCredential) => {
                 history.push(Redirect_URL)
                 const user = userCredential.user;
+                console.log(user)
                 setCreateUserError("")
             })
             .catch((error) => {

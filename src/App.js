@@ -13,6 +13,7 @@ import PrivateRoute from "./Pages/Login/PrivateRoute/PrivateRoute";
 import AddPackage from "./Components/AddNewPackage/AddPackage";
 import MyOrders from "./Pages/MyOrders/MyOrders";
 import ManageOrders from "./Pages/ManageAllOrders/ManageOrders";
+import OrderPage from "./Pages/OrderPage/OrderPage";
 
 const App = () => {
     return (
@@ -27,6 +28,9 @@ const App = () => {
                                 <Redirect to="/"/>
                             </Route>
                             <Route exact path="/packages" component={Packages}/>
+                            <PrivateRoute exact path="/order/:id">
+                                <OrderPage/>
+                            </PrivateRoute>
                             <PrivateRoute exact path="/add_new_package">
                                 <AddPackage/>
                             </PrivateRoute>
