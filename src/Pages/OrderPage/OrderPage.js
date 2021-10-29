@@ -7,7 +7,7 @@ import {useForm} from "react-hook-form";
 
 const OrderPage = () => {
     const [tourPackage, setTourPackage] = useState({})
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, reset} = useForm();
     const {user} = useAuth()
     const {id} = useParams()
 
@@ -22,7 +22,8 @@ const OrderPage = () => {
             price: tourPackage.price,
             name: user?.displayName,
             email: user.email,
-            address: data.address
+            address: data.address,
+            orderStatus: 'Pending'
         }
         // console.log("New Order",newOrder)
         axios.post(`http://localhost:5000/orders`, newOrder)
@@ -31,6 +32,7 @@ const OrderPage = () => {
                     alert("Order Placed Successfully")
                 }
             })
+        reset()
     };
 
 

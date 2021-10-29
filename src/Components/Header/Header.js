@@ -23,7 +23,7 @@ const Header = () => {
                             }
                             {
                                 (user?.displayName || user.email) &&
-                                <Nav.Link as={HashLink} to="/manage_all_orders">Manage Orders</Nav.Link>
+                                <Nav.Link as={HashLink} to="/manage_all_orders">Manage All Orders</Nav.Link>
                             }
                         </Nav>
                         {
